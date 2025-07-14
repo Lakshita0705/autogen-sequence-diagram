@@ -14,8 +14,21 @@ Language-Independent: No need for Java, Python, etc. — input is in pure JSON
 ---
 
 # Project Structure
-<pre><code>```plaintext autogen_sequence_ai/ ├── main.py # Main runner script ├── diagram_generator.py # Builds PlantUML from JSON ├── plantuml_wrapper.py # Converts PlantUML (.puml) to PNG ├── ollama_interface.py # Communicates with Ollama's local Phi model ├── system_model.json # Language-independent semantic model input ├── output/ # Contains generated sequence.puml and sequence.png ├── plantuml.jar # PlantUML renderer └── README.md ```</code></pre>
+## 📁 Folder Structure
 
+```
+autogen_sequence_ai/
+├── main.py                # Main runner script
+├── diagram_generator.py   # Builds PlantUML from JSON
+├── plantuml_wrapper.py    # Converts PlantUML (.puml) to PNG
+├── ollama_interface.py    # Communicates with Ollama's local Phi model
+├── system_model.json      # Language-independent semantic model input
+├── output/                # Contains generated sequence.puml and sequence.png
+│   ├── sequence.puml      # PlantUML syntax
+│   └── sequence.png       # UML diagram image
+├── plantuml.jar           # PlantUML renderer
+└── README.md              # Project documentation
+```
 ---
 
 # Setup Instructions
@@ -36,5 +49,10 @@ Language-Independent: No need for Java, Python, etc. — input is in pure JSON
 ---
 
 # Output
-After running, check the output/ folder:
-<pre><code>```plaintext output/ ├── sequence.puml # PlantUML syntax └── sequence.png # UML diagram image ```</code></pre>
+## 📤 Output Folder
+
+```
+output/
+├── sequence.puml       # PlantUML syntax
+└── sequence.png        # UML diagram image
+```
