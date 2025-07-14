@@ -1,0 +1,45 @@
+{
+  "actors": ["Customer", "WebApp", "PaymentService", "InventoryService", "EmailService"],
+  "interactions": [
+    {
+      "from": "Customer",
+      "to": "WebApp",
+      "action": "Place Order"
+    },
+    {
+      "from": "WebApp",
+      "to": "InventoryService",
+      "action": "Check Item Availability"
+    },
+    {
+      "from": "InventoryService",
+      "to": "WebApp",
+      "action": "Item Available"
+    },
+    {
+      "from": "WebApp",
+      "to": "PaymentService",
+      "action": "Initiate Payment"
+    },
+    {
+      "from": "PaymentService",
+      "to": "WebApp",
+      "action": "Payment Successful"
+    },
+    {
+      "from": "WebApp",
+      "to": "InventoryService",
+      "action": "Reserve Item"
+    },
+    {
+      "from": "WebApp",
+      "to": "EmailService",
+      "action": "Send Confirmation Email"
+    },
+    {
+      "from": "EmailService",
+      "to": "Customer",
+      "action": "Email Sent"
+    }
+  ]
+}

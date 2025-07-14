@@ -1,0 +1,15 @@
+@startuml
+participant PaymentService
+participant EmailService
+participant WebApp
+participant Customer
+participant InventoryService
+Customer -> WebApp : Place Order
+WebApp -> InventoryService : Check Item Availability
+InventoryService -> WebApp : Item Available
+WebApp -> PaymentService : Initiate Payment
+PaymentService -> WebApp : Payment Successful
+WebApp -> InventoryService : Reserve Item
+WebApp -> EmailService : Send Confirmation Email
+EmailService -> Customer : Email Sent
+@enduml
