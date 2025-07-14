@@ -19,9 +19,10 @@ autogen_sequence_ai/
 ├── diagram_generator.py # Builds PlantUML from JSON
 ├── plantuml_wrapper.py # Converts PlantUML (.puml) to PNG
 ├── ollama_interface.py # Communicates with Ollama's local Phi model
-├── input_sequence.json # Language-independent semantic model input
+├── system_model.json # Language-independent semantic model input
 ├── output/ # Contains generated sequence.puml and sequence.png
-└──plantuml.jar # PlantUML renderer 
+├── plantuml.jar # PlantUML renderer 
+└── README.md
 
 ---
 
