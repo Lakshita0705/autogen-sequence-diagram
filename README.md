@@ -14,15 +14,7 @@ Language-Independent: No need for Java, Python, etc. — input is in pure JSON
 ---
 
 # Project Structure
-autogen_sequence_ai/
-├── main.py # Main runner script
-├── diagram_generator.py # Builds PlantUML from JSON
-├── plantuml_wrapper.py # Converts PlantUML (.puml) to PNG
-├── ollama_interface.py # Communicates with Ollama's local Phi model
-├── system_model.json # Language-independent semantic model input
-├── output/ # Contains generated sequence.puml and sequence.png
-├── plantuml.jar # PlantUML renderer 
-└── README.md
+<pre><code>```plaintext autogen_sequence_ai/ ├── main.py # Main runner script ├── diagram_generator.py # Builds PlantUML from JSON ├── plantuml_wrapper.py # Converts PlantUML (.puml) to PNG ├── ollama_interface.py # Communicates with Ollama's local Phi model ├── system_model.json # Language-independent semantic model input ├── output/ # Contains generated sequence.puml and sequence.png ├── plantuml.jar # PlantUML renderer └── README.md ```</code></pre>
 
 ---
 
@@ -45,6 +37,4 @@ autogen_sequence_ai/
 
 # Output
 After running, check the output/ folder:
-output/
-├── sequence.puml       # PlantUML syntax
-└── sequence.png        # UML diagram image
+<pre><code>```plaintext output/ ├── sequence.puml # PlantUML syntax └── sequence.png # UML diagram image ```</code></pre>
