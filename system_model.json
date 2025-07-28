@@ -1,0 +1,69 @@
+{
+  "actors": [
+    "AuthService",
+    "InventoryRepository",
+    "InventoryService",
+    "OrderRepository",
+    "OrderService",
+    "UserController",
+    "UserRepository",
+    "UserService"
+  ],
+  "interactions": [
+    {
+      "from": "UserController",
+      "to": "UserService",
+      "action": "createUser"
+    },
+    {
+      "from": "UserController",
+      "to": "AuthService",
+      "action": "authenticate"
+    },
+    {
+      "from": "UserService",
+      "to": "UserRepository",
+      "action": "save"
+    },
+    {
+      "from": "UserService",
+      "to": "UserRepository",
+      "action": "findById"
+    },
+    {
+      "from": "OrderService",
+      "to": "OrderRepository",
+      "action": "save"
+    },
+    {
+      "from": "OrderService",
+      "to": "InventoryService",
+      "action": "reserveStock"
+    },
+    {
+      "from": "OrderService",
+      "to": "OrderRepository",
+      "action": "cancel"
+    },
+    {
+      "from": "OrderService",
+      "to": "InventoryService",
+      "action": "releaseStock"
+    },
+    {
+      "from": "InventoryService",
+      "to": "InventoryRepository",
+      "action": "decrement"
+    },
+    {
+      "from": "InventoryService",
+      "to": "InventoryRepository",
+      "action": "increment"
+    },
+    {
+      "from": "AuthService",
+      "to": "UserRepository",
+      "action": "findByEmail"
+    }
+  ]
+}

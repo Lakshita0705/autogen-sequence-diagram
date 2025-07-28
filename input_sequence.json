@@ -1,0 +1,146 @@
+{
+  "classes": [
+    {
+      "name": "UserController",
+      "type": "class",
+      "methods": [
+        {
+          "name": "registerUser",
+          "params": ["username", "email", "password"],
+          "calls": ["UserService.createUser"]
+        },
+        {
+          "name": "login",
+          "params": ["email", "password"],
+          "calls": ["AuthService.authenticate"]
+        }
+      ]
+    },
+    {
+      "name": "UserService",
+      "type": "class",
+      "methods": [
+        {
+          "name": "createUser",
+          "params": ["username", "email", "password"],
+          "calls": ["UserRepository.save"]
+        },
+        {
+          "name": "getUser",
+          "params": ["userId"],
+          "calls": ["UserRepository.findById"]
+        }
+      ]
+    },
+    {
+      "name": "OrderService",
+      "type": "class",
+      "methods": [
+        {
+          "name": "createOrder",
+          "params": ["userId", "items"],
+          "calls": ["OrderRepository.save", "InventoryService.reserveStock"]
+        },
+        {
+          "name": "cancelOrder",
+          "params": ["orderId"],
+          "calls": ["OrderRepository.cancel", "InventoryService.releaseStock"]
+        }
+      ]
+    },
+    {
+      "name": "InventoryService",
+      "type": "class",
+      "methods": [
+        {
+          "name": "reserveStock",
+          "params": ["items"],
+          "calls": ["InventoryRepository.decrement"]
+        },
+        {
+          "name": "releaseStock",
+          "params": ["items"],
+          "calls": ["InventoryRepository.increment"]
+        }
+      ]
+    },
+    {
+      "name": "AuthService",
+      "type": "class",
+      "methods": [
+        {
+          "name": "authenticate",
+          "params": ["email", "password"],
+          "calls": ["UserRepository.findByEmail"]
+        }
+      ]
+    }
+  ],
+  "interfaces": [
+    {
+      "name": "UserRepository",
+      "methods": [
+        { "name": "save", "params": ["user"] },
+        { "name": "findById", "params": ["userId"] },
+        { "name": "findByEmail", "params": ["email"] }
+      ]
+    },
+    {
+      "name": "OrderRepository",
+      "methods": [
+        { "name": "save", "params": ["order"] },
+        { "name": "cancel", "params": ["orderId"] }
+      ]
+    },
+    {
+      "name": "InventoryRepository",
+      "methods": [
+        { "name": "decrement", "params": ["items"] },
+        { "name": "increment", "params": ["items"] }
+      ]
+    }
+  ],
+  "businessLogic": {
+    "CRUD": [
+      { "operation": "create", "entity": "User", "method": "UserService.createUser" },
+      { "operation": "read", "entity": "User", "method": "UserService.getUser" },
+      { "operation": "create", "entity": "Order", "method": "OrderService.createOrder" },
+      { "operation": "delete", "entity": "Order", "method": "OrderService.cancelOrder" }
+    ],
+    "workflows": [
+      {
+        "name": "User Registration",
+        "steps": [
+          "UserController.registerUser → UserService.createUser → UserRepository.save"
+        ]
+      },
+      {
+        "name": "User Login",
+        "steps": [
+          "UserController.login → AuthService.authenticate → UserRepository.findByEmail"
+        ]
+      },
+      {
+        "name": "Order Placement",
+        "steps": [
+          "OrderService.createOrder → OrderRepository.save",
+          "OrderService.createOrder → InventoryService.reserveStock → InventoryRepository.decrement"
+        ]
+      },
+      {
+        "name": "Order Cancellation",
+        "steps": [
+          "OrderService.cancelOrder → OrderRepository.cancel",
+          "OrderService.cancelOrder → InventoryService.releaseStock → InventoryRepository.increment"
+        ]
+      }
+    ]
+  },
+  "dependencies": [
+    { "class": "UserController", "dependsOn": ["UserService", "AuthService"] },
+    { "class": "UserService", "dependsOn": ["UserRepository"] },
+    { "class": "OrderService", "dependsOn": ["OrderRepository", "InventoryService"] },
+    { "class": "InventoryService", "dependsOn": ["InventoryRepository"] },
+    { "class": "AuthService", "dependsOn": ["UserRepository"] }
+  ]
+}

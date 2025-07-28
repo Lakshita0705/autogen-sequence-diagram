@@ -1,0 +1,21 @@
+@startuml
+participant OrderService
+participant UserRepository
+participant InventoryRepository
+participant AuthService
+participant OrderRepository
+participant UserController
+participant UserService
+participant InventoryService
+UserController -> UserService : createUser
+UserController -> AuthService : authenticate
+UserService -> UserRepository : save
+UserService -> UserRepository : findById
+OrderService -> OrderRepository : save
+OrderService -> InventoryService : reserveStock
+OrderService -> OrderRepository : cancel
+OrderService -> InventoryService : releaseStock
+InventoryService -> InventoryRepository : decrement
+InventoryService -> InventoryRepository : increment
+AuthService -> UserRepository : findByEmail
+@enduml
